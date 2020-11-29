@@ -10,21 +10,21 @@ spec:
     matchLabels:
       app: web
   replicas: 5
-  minReadySeconds: 5
+  minReadySeconds: 5 # minimum time new pod running to terminate the old one
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailable: 0
-      maxSurge: 1
+      maxUnavailable: 0 # During update never drop below the replicas value (10)
+      maxSurge: 1 # max go up tp replicas value (replicas + 1)(11)
   template:
     metadata:
       labels:
         app: web
-    spec: 
+    spec:
       terminationGracePeriodSeconds: 1
       containers:
-      - name: hello-pod
-        image: nigelpoulton/getting-started-k8s:1.0
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8080
+        - name: hello-pod
+          image: allanweber/getting-started-k8s:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080

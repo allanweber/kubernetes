@@ -60,7 +60,7 @@ Apply the token
 
 `kubectl get pods --watch` - watch the pods state
 
-`kubectl get pods -o wide` - more info
+`kubectl get pods -o wide` - more info, cluster where the pods are running
 
 `kubectl describe pods hello-pod` = full info
 
@@ -81,6 +81,24 @@ Apply the token
 `kubectl apply -f file.yml` - Declarative way
 
 `kubectl get svc` - will show EXTERNAL-IP address to the public internet ip
+
+`kubectl describe ep [service-name]` - Get endpoint of the service, will return in Addresses property the list of health pods IPS that matches the label selector
+
+## Deployment
+
+`kubectl apply -f deploy.yml` - Apply a deployment
+
+`kubectl get deploy` - Get deploys
+
+`kubectl get rs` - Get replica sets
+
+`kubectl get pods` - see deployed running
+
+`kubectl rollout status deploy [deployment-name]` - watch a deployment
+
+`kubectl rollout history deploy web-deploy` - history of rollout
+
+`kubectl rollout undo deploy web-deploy --to-revision=1` - Rollback to some revision
 
 ## Getting Started with Kubernetes - Pluralsight (Nigel Poulton)
 
