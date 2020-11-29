@@ -12,6 +12,8 @@ Use Docker Kubernetes
 
 `kubectl get all`
 
+`kubectl get nodes`
+
 `kubectl get pods`
 
 `kubectl get services`
@@ -54,3 +56,36 @@ Apply the token
 
 `kubectl delete deployment [podname]` - Delete the deployment that manages the pod (and the pod)
 
+`kubectl apply -f pod.yml` - apply a file
+
+`kubectl get pods --watch` - watch the pods state
+
+`kubectl get pods -o wide` - more info
+
+`kubectl describe pods hello-pod` = full info
+
+`kubectl get pods --show-labels` - Show labels
+
+## Services
+
+`kubectl get svc` - Get services
+
+`kubectl delete svc [name]` - Delete service
+
+`kubectl expose pod hello-pod --name=hello-svc --target-port=8080 --type=NodePort` - Imperative declaration
+
+`kubectl apply -f file.yml` - Declarative way
+
+### Load Balancer Service
+
+`kubectl apply -f file.yml` - Declarative way
+
+`kubectl get svc` - will show EXTERNAL-IP address to the public internet ip
+
+## Getting Started with Kubernetes - Pluralsight (Nigel Poulton)
+
+### Source
+
+[https://github.com/nigelpoulton/getting-started-k8s](https://github.com/nigelpoulton/getting-started-k8s)
+
+[Kubernetes Icons](https://github.com/kubernetes/community/tree/master/icons)
