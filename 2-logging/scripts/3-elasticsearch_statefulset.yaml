@@ -1,16 +1,16 @@
 # In this block, we define a StatefulSet called es-cluster in the
-# kube-logging namespace. We then associate it with our previously
+# logging namespace. We then associate it with our previously
 # created elasticsearch Service using the serviceName field.
 # This ensures that each Pod in the StatefulSet will be accessible
 # using the following DNS address:
-# es-cluster-[0,1,2].elasticsearch.kube-logging.svc.cluster.local,
+# es-cluster-[0,1,2].elasticsearch.logging.svc.cluster.local,
 # where [0,1,2] corresponds to the Pod’s assigned integer ordinal
 
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: es-cluster
-  namespace: kube-logging
+  namespace: logging
 spec:
   serviceName: elasticsearch
   replicas: 3
@@ -27,7 +27,7 @@ spec:
           image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
           resources:
             limits:
-              cpu: 500m
+              cpu: 300m
             requests:
               cpu: 100m
           ports:
@@ -42,7 +42,7 @@ spec:
               mountPath: /usr/share/elasticsearch/data
           env:
             - name: cluster.name
-              value: lke14200 #### PAY ATTENTION
+              value: lke14781 #### PAY ATTENTION
             - name: node.name
               valueFrom:
                 fieldRef:
@@ -52,7 +52,7 @@ spec:
             - name: cluster.initial_master_nodes
               value: "es-cluster-0,es-cluster-1,es-cluster-2"
             - name: ES_JAVA_OPTS
-              value: "-Xms512m -Xmx512m"
+              value: "-Xmx256m -Xms256m"
       initContainers:
         - name: fix-permissions
           image: busybox

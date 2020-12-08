@@ -1,5 +1,7 @@
 # Kubernetes
 
+[https://github.com/kubernetes/examples](https://github.com/kubernetes/examples)
+
 ## Running Locally
 
 Use Docker Kubernetes
@@ -65,6 +67,18 @@ Apply the token
 `kubectl describe pods hello-pod` = full info
 
 `kubectl get pods --show-labels` - Show labels
+
+`kubectl get pod [POD-NAME] -o yaml` - Get pod info in YAML format
+
+### Testing Connection between PODs
+
+`kubectl exec [POD-NAME] -it sh`
+
+`apk add curl` and `curl -s http://10.2.4.13:8080/health`
+
+`kubectl exec [POD-NAME] -- curl -s http://10.2.4.13:8080/health`
+
+`kubectl exec [POD-NAME] -- curl -s http://[SERVICE-NAME]:[SERVICE-PORT]/health`
 
 ## Services
 

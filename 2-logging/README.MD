@@ -18,7 +18,7 @@ A headless service does not perform load balancing or have a static IP; to learn
 
 * run `kubectl apply -f scripts/2-elasticsearch_svc.yaml`
 
-* check if it is created: `kubectl get services --namespace=kube-logging`
+* check if it is created: `kubectl get services --namespace=logging`
 
 ### Creating the StatefulSet
 
@@ -28,9 +28,9 @@ A Kubernetes StatefulSet allows you to assign a stable identity to Pods and gran
 
 * run `kubectl apply -f scripts/3-elasticsearch_statefulset.yaml`
 
-* monitor the StatefulSet rollout: `kubectl rollout status sts/es-cluster --namespace=kube-logging`
+* monitor the StatefulSet rollout: `kubectl rollout status sts/es-cluster --namespace=logging`
 
-* `kubectl port-forward es-cluster-0 9200:9200 --namespace=kube-logging`
+* `kubectl port-forward es-cluster-0 9200:9200 --namespace=logging`
 
 * `curl http://localhost:9200/_cluster/state?pretty`
 
@@ -42,11 +42,11 @@ The ELASTICSEARCH_URL environment variable to set the endpoint and port for the 
 
 * run `kubectl apply -f scripts/4-kibana.yaml`
 
-* `kubectl rollout status deployment/kibana --namespace=kube-logging`
+* `kubectl rollout status deployment/kibana --namespace=logging`
 
-* `kubectl get pods --namespace=kube-logging`
+* `kubectl get pods --namespace=logging`
 
-* `kubectl port-forward kibana-866c457776-nr7dm 5601:5601 --namespace=kube-logging`
+* `kubectl port-forward [KIBANA-POD-NAME] 5601:5601 --namespace=logging`
 
 * [http://localhost:5601](http://localhost:5601)
 
@@ -54,11 +54,13 @@ The ELASTICSEARCH_URL environment variable to set the endpoint and port for the 
 
 * run `kubectl apply -f scripts/5-kibana-loadbalancer.yaml`
 
-* `kubectl get svc --namespace=kube-logging`
+* `kubectl get svc --namespace=logging`
 
 ## Logstash
 
 * run `kubectl apply -f scripts/6-logstash-deployment.yaml`
+
+### Optional
 
 * run `kubectl apply -f scripts/6-logstash-loadbalancer.yaml`
 
@@ -66,6 +68,6 @@ The ELASTICSEARCH_URL environment variable to set the endpoint and port for the 
 
 * run `kubectl apply -f scripts/7-fluentd.yaml`
 
-* `kubectl get ds --namespace=kube-logging`
+* `kubectl get ds --namespace=logging`
 
 * create a kibana Index patterns like `logstash-*`
