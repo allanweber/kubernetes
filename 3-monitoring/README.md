@@ -12,13 +12,11 @@
 
 ### Kubernetes Prometheus deploy
 
-`helm install prometheus stable/prometheus --namespace monitoring`
-
 `helm install prometheus prometheus-community/prometheus --namespace monitoring`
 
 `kubectl get pods --namespace monitoring -l "app=prometheus,component=server" -o jsonpath="{.items[0].metadata.name}"`
 
-`kubectl port-forward prometheus-server-9fc9d497-jd5bl 9090:9090 --namespace=monitoring`
+`kubectl port-forward [POD-NAME] 9090:9090 --namespace=monitoring`
 
 ## Modify Deployments to send data to Prometheus
 
@@ -47,7 +45,7 @@ Add the annotations to the deployment
 
 `kubectl get pods --namespace monitoring -l "app.kubernetes.io/name=grafana-stack,app.kubernetes.io/instance=grafana-stack" -o jsonpath="{.items[0].metadata.name}"`
 
-`kubectl port-forward grafana-stack-665df879b9-zlh8s 3000:3000 --namespace=monitoring`
+`kubectl port-forward service/grafana-stack 3000:80 --namespace=monitoring`
 
 #### Get your 'admin' user password by running
 

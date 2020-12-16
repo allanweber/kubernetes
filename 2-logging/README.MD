@@ -30,7 +30,7 @@ A Kubernetes StatefulSet allows you to assign a stable identity to Pods and gran
 
 * monitor the StatefulSet rollout: `kubectl rollout status sts/es-cluster --namespace=logging`
 
-* `kubectl port-forward es-cluster-0 9200:9200 --namespace=logging`
+* `kubectl port-forward service/elasticsearch 9200:9200 --namespace=logging`
 
 * `curl http://localhost:9200/_cluster/state?pretty`
 
@@ -46,7 +46,7 @@ The ELASTICSEARCH_URL environment variable to set the endpoint and port for the 
 
 * `kubectl get pods --namespace=logging`
 
-* `kubectl port-forward [KIBANA-POD-NAME] 5601:5601 --namespace=logging`
+* `kubectl port-forward service/kibana 5601:5601 --namespace=logging`
 
 * [http://localhost:5601](http://localhost:5601)
 
