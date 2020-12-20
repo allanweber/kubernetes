@@ -121,3 +121,35 @@ Apply the token
 [https://github.com/nigelpoulton/getting-started-k8s](https://github.com/nigelpoulton/getting-started-k8s)
 
 [Kubernetes Icons](https://github.com/kubernetes/community/tree/master/icons)
+
+## ConfigMaps
+
+`kubectl get cm [cm-name] -o yaml`
+
+## Secrets
+
+`kubectl get secrets`
+
+`kubectl create secret generic [secret-name] --from-literal=[name]=[value]`
+
+`kubectl get secret [secret-name]`
+
+`kubectl get secret [secret-name] -o yaml`
+
+## Rollback
+
+`kubectl rollout history deployment [name] -n [namespace]`
+
+`kubectl rollout history deployment [name] -n [namespace] --revision=3` - more details
+
+`kubectl rollout undo deployment [name] -n [namespace] --to-revision=3` - undo to revision
+
+## Test Loading
+
+### Use ApacheBench
+
+`ab -n 1000 -c 100 "http://localhost:8080/registration"`
+
+### Curl
+
+`curl http://localhost:8080/registration/?[1-20]`

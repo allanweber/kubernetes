@@ -21,3 +21,11 @@ It can be also checked on some DNS checker [https://dnschecker.org/](https://dns
 It takes a while to be provisioned
 
 `k get clusterissuer -n infrastructure`
+
+## Grafana Port Forward
+
+`kubectl port-forward svc/grafana --namespace infrastructure 8888:80`
+
+### Get Grafana Password
+
+`kubectl get secret grafana --namespace infrastructure --template='{{ index .data "admin-password"}}' | base64 -d`
