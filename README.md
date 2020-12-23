@@ -153,3 +153,19 @@ Apply the token
 ### Curl
 
 `curl http://localhost:8080/registration/?[1-20]`
+
+## Networking
+
+`k get nodes -o wide`
+
+`k exec [POD-NAME] -it sh  -n [namespace]`
+`ip addr`
+
+`k describe node [node-name] | more`
+
+`k describe deployment coredns -n kube-system | more`
+`k get configmaps -n kube-system coredns -o yaml | more`
+
+`k get endpoints [service-name] -n [namespace]`
+
+`k exec -it [POD-NAME] -- env -n [namespace] | sort`
