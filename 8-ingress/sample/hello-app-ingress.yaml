@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: hello-app-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+  - hosts:
+    - blog.candidates-career.tech
+    - shop.candidates-career.tech
+    secretName: example-tls
+  rules:
+  - host: blog.candidates-career.tech
+    http:
+      paths:
+      - backend:
+          serviceName: hello-one
+          servicePort: 80
+  - host: shop.candidates-career.tech
+    http:
+      paths:
+      - backend:
+          serviceName: hello-two
+          servicePort: 80
